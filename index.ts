@@ -1,0 +1,20 @@
+import { Observable } from 'rxjs';
+
+const interval$ = new Observable<number>((subscriber) => {
+  let sayac = 1;
+  const intervalId = setInterval(() => {
+    console.log('Sayı', sayac);
+    subscriber.next(sayac++);
+  }, 1000);
+  return () => {
+    clearInterval(intervalId);
+  };
+});
+
+const subscription = interval$.subscribe((value) => {
+  console.log(value);
+});
+setTimeout(() => {
+  console.log('Bitir');
+  subscription.unsubscribe();
+}, 5000);
