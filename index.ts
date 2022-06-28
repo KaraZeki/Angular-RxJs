@@ -24,18 +24,32 @@ import { ajax } from 'rxjs/ajax';
 
 //--PART 2 --COLD OBSERVABLE
 
-const ajax$ = ajax<any>(
-  'https://random-data-api.com/api/address/random_address?size=3'
-);
+// const ajax$ = ajax<any>(
+//   'https://random-data-api.com/api/address/random_address?size=3'
+// );
 
-ajax$.subscribe((data) => {
-  console.log('Subs -1 ', data.response[0].full_address);
-});
+// ajax$.subscribe((data) => {
+//   console.log('Subs -1 ', data.response[0].full_address);
+// });
 
-ajax$.subscribe((data) => {
-  console.log('Subs -2 ', data.response[0].full_address);
-});
+// ajax$.subscribe((data) => {
+//   console.log('Subs -2 ', data.response[0].full_address);
+// });
 
-ajax$.subscribe((data) => {
-  console.log('Subs -3 ', data.response[0].full_address);
-});
+// ajax$.subscribe((data) => {
+//   console.log('Subs -3 ', data.response[0].full_address);
+// });
+
+// //--PART 3 --isEmpty
+// import { Subject, isEmpty } from 'rxjs';
+
+// const source = new Subject<string>();
+// const result = source.pipe(isEmpty());
+
+// source.subscribe((x) => console.log(x));
+// result.subscribe((x) => console.log(x));
+
+// source.next('a');
+// source.next('b');
+// source.next('c');
+// source.complete();
