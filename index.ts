@@ -1,8 +1,9 @@
 //--PART 1 SUMMARY RXJS
 // import { Observable } from 'rxjs';
 
-import { fromEvent } from 'rxjs';
+import { from, fromEvent } from 'rxjs';
 import { combineLatest } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 // const interval$ = new Observable<number>((subscriber) => {
 //   let sayac = 1;
@@ -56,30 +57,38 @@ import { combineLatest } from 'rxjs';
 // source.complete();
 
 //PART 4 combineLatest
-const temperature = document.getElementById('exampleInputValue');
-const conversation = document.getElementById('exampleFormControlSelect');
-const resultText = document.getElementById('result');
+// const temperature = document.getElementById('exampleInputValue');
+// const conversation = document.getElementById('exampleFormControlSelect');
+// const resultText = document.getElementById('result');
 
-const temperatureEvent$ = fromEvent(temperature, 'input');
-const conversationEvent$ = fromEvent(conversation, 'input');
+// const temperatureEvent$ = fromEvent(temperature, 'input');
+// const conversationEvent$ = fromEvent(conversation, 'input');
 
-combineLatest([temperatureEvent$, conversationEvent$]).subscribe(
-  ([temperatureEvent$, conversationEvent$]) => {
-    // console.log(
-    //   temperatureEvent$.target['value'],
-    //   conversationEvent$.target['value']
-    // );
+// combineLatest([temperatureEvent$, conversationEvent$]).subscribe(
+//   ([temperatureEvent$, conversationEvent$]) => {
+//     // console.log(
+//     //   temperatureEvent$.target['value'],
+//     //   conversationEvent$.target['value']
+//     // );
 
-    const temperature = Number(temperatureEvent$.target['value']);
-    const conversion = conversationEvent$.target['value'];
+//     const temperature = Number(temperatureEvent$.target['value']);
+//     const conversion = conversationEvent$.target['value'];
 
-    let result: number;
-    if (conversion === 'f-to-c') {
-      result = ((temperature - 32) * 5) / 9;
-    } else if (conversion === 'c-to-f') {
-      result = (temperature * 9) / 5 + 32;
-    }
+//     let result: number;
+//     if (conversion === 'f-to-c') {
+//       result = ((temperature - 32) * 5) / 9;
+//     } else if (conversion === 'c-to-f') {
+//       result = (temperature * 9) / 5 + 32;
+//     }
 
-    resultText.innerHTML = String(result);
-  }
-);
+//     resultText.innerHTML = String(result);
+//   }
+// );
+
+//PART 4 PİPE
+
+const data = from([1, 2, 3, 4, 5]);
+
+var exampleFilter = data.pipe(filter((num) => num % 2 === 1));
+
+exampleFilter.subscribe(console.log);
