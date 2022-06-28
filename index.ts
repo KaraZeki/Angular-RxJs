@@ -1,7 +1,8 @@
 //--PART 1 SUMMARY RXJS
 // import { Observable } from 'rxjs';
 
-import { ajax } from 'rxjs/ajax';
+import { fromEvent } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 // const interval$ = new Observable<number>((subscriber) => {
 //   let sayac = 1;
@@ -53,3 +54,32 @@ import { ajax } from 'rxjs/ajax';
 // source.next('b');
 // source.next('c');
 // source.complete();
+
+//PART 4 combineLatest
+const temperature = document.getElementById('exampleInputValue');
+const conversation = document.getElementById('exampleFormControlSelect');
+const resultText = document.getElementById('result');
+
+const temperatureEvent$ = fromEvent(temperature, 'input');
+const conversationEvent$ = fromEvent(conversation, 'input');
+
+combineLatest([temperatureEvent$, conversationEvent$]).subscribe(
+  ([temperatureEvent$, conversationEvent$]) => {
+    // console.log(
+    //   temperatureEvent$.target['value'],
+    //   conversationEvent$.target['value']
+    // );
+
+    const temperature = Number(temperatureEvent$.target['value']);
+    const conversion = conversationEvent$.target['value'];
+
+    let result: number;
+    if (conversion === 'f-to-c') {
+      result = ((temperature - 32) * 5) / 9;
+    } else if (conversion === 'c-to-f') {
+      result = (temperature * 9) / 5 + 32;
+    }
+
+    resultText.innerHTML = String(result);
+  }
+);
